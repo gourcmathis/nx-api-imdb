@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends
-from app.api import call
+from src.api import call
 
 app = FastAPI()
 app.include_router(call.router)

@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from dotenv import load_dotenv 
 import json
 import os
-import app.requestsimdb as requestsimdb
+import src.requestsimdb as requestsimdb
 
 load_dotenv()
 External_API=os.getenv("External_API")
