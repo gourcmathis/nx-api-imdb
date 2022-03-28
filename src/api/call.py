@@ -22,9 +22,14 @@ router = APIRouter(
     prefix="/api/v1",
 )
 
+@router.get("/usage")
+async def usage(api_key: str = API_key):
+    return (await requestsimdb.call_usage(api_key))
+
 @router.get("/get_films")
 async def getFilmsJSON():
-    request = await requestsimdb.call_api(External_API, API_key)
+    request = await requestsimdb.call_TOP100(External_API, API_key)
     dictionary = json.dumps(request)
     films = json.loads(dictionary)
     return(films["items"])
+
