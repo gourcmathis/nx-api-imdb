@@ -1,7 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+from app.api import call
+
 
 app = FastAPI()
-@app.get("/")
+app.include_router(call.router)
 
+@app.get("/")
 async def main_root(): 
-    return {"Net": "Flex"}
+    return {"Visit /docs to try the API"}
