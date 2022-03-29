@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Depends
-from src.api import call
+from src.api import endpoints
 
 app = FastAPI()
-app.include_router(call.router)
+app.include_router(endpoints.router)
 
 @app.get("/")
 async def main_root(): 
