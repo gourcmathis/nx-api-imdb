@@ -1,16 +1,13 @@
 from fastapi import FastAPI, APIRouter
 from pydantic import BaseModel
 from dotenv import load_dotenv 
+from src.imdb import *
 import json
 import os
 import src.requestsimdb as requestsimdb
 
 load_dotenv()
 API_key=os.getenv("API_key")
-API_TOP100=os.getenv("API_TOP100")
-API_ADVANCED=os.getenv("API_ADVANCED")
-API_USAGE=os.getenv("API_USAGE")
-API_SEARCH_TITLE=os.getenv("API_SEARCH_TITLE")
 
 class baseFilms(BaseModel):
     id = str
