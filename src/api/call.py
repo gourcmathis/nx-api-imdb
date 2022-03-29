@@ -6,8 +6,11 @@ import os
 import src.requestsimdb as requestsimdb
 
 load_dotenv()
-External_API=os.getenv("External_API")
 API_key=os.getenv("API_key")
+API_TOP100=os.getenv("API_TOP100")
+API_ADVANCED=os.getenv("API_ADVANCED")
+API_USAGE=os.getenv("API_USAGE")
+API_SEARCH_TITLE=os.getenv("API_SEARCH_TITLE")
 
 class baseFilms(BaseModel):
     id = str
@@ -23,13 +26,26 @@ router = APIRouter(
 )
 
 @router.get("/usage")
-async def usage(api_key: str = API_key):
-    return (await requestsimdb.call_usage(api_key))
+async def usage():
+    return (await requestsimdb.call_usage(API_USAGE, API_key))
+
+@router.get("/search/{title}")
+async def searchByTitle(title: str):
+    request = await requestsimdb.call_searchByTitle(API_SEARCH_TITLE, API_key, title)
+    dictionary = json.dumps(request)
+    films = json.loads(dictionary)
+    return(films["results"])
 
 @router.get("/get_films")
-async def getFilmsJSON():
-    request = await requestsimdb.call_TOP100(External_API, API_key)
+async def get100MostPopularFilms():
+    request = await requestsimdb.call_TOP100(API_TOP100, API_key)
     dictionary = json.dumps(request)
     films = json.loads(dictionary)
     return(films["items"])
 
+@router.get("/get_250")
+async def getTOP250IMDBfilms():
+    request = await requestsimdb.call_TOP250IMDB(API_ADVANCED,API_key)
+    dictionary = json.dumps(request)
+    films = json.loads(dictionary)
+    return(films["results"])
