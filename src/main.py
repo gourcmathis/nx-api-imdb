@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends
-from src.api import endpoints
+from src.api.v1 import endpoints
 
 app = FastAPI()
 app.include_router(endpoints.router)

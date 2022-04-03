@@ -4,3 +4,4 @@ motor
 pymongo
 python-dotenv
 requests-async
+python-multipart==0.0.5
